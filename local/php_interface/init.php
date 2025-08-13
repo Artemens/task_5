@@ -1,7 +1,12 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'].'/local/modules/dev.site/include.php';
-AddEventHandler('Iblock', 'OnAfterIBlockElementAdd', Array("Iblock", "addLog"));
-AddEventHandler('Iblock', 'OnAfterIBlockElementUpdate', Array("Iblock", "addLog"));
+
+use Bitrix\Main\EventManager;
+
+if (file_exists($_SERVER['DOCUMENT_ROOT'].'/local/modules/dev.site/include.php')) {
+    require_once $_SERVER['DOCUMENT_ROOT'].'/local/modules/dev.site/include.php';
+}
+$eventManager = EventManager::getInstance();
+$eventManager->addEventHandler('Iblock', 'OnAfterIBlockElementAdd', ['Only\\Site\\Handlers\\Iblock', 'addLog']);
 
 $agentName = "MyAgent";
 $agentFunction = "\\Only\\Site\\Agents\\Iblock::clearOldLogs();";
