@@ -7,6 +7,7 @@ if (file_exists($_SERVER['DOCUMENT_ROOT'].'/local/modules/dev.site/include.php')
 }
 $eventManager = EventManager::getInstance();
 $eventManager->addEventHandler('Iblock', 'OnAfterIBlockElementAdd', ['Only\\Site\\Handlers\\Iblock', 'addLog']);
+$eventManager->addEventHandler('Iblock', 'OnAfterIBlockElementUpdate', ['Only\\Site\\Handlers\\Iblock', 'addLog']);
 
 $agentName = "MyAgent";
 $agentFunction = "\\Only\\Site\\Agents\\Iblock::clearOldLogs();";
